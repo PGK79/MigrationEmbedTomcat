@@ -20,7 +20,7 @@ public class PostRepository {
     }
 
     public Optional<Post> getById(long id) {
-        return Optional.of(allPosts.get(id));
+        return Optional.ofNullable(allPosts.get(id));
     }
 
     public Post save(Post post) {
