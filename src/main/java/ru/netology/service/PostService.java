@@ -1,7 +1,6 @@
 package ru.netology.service;
 
 import org.springframework.stereotype.Service;
-import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 import ru.netology.repository.PostRepository;
 
@@ -20,11 +19,8 @@ public class PostService {
     }
 
     public Post getById(long id) {
-        if (id <= all().size()) {
-            return repository.getById(id).orElseThrow(NotFoundException::new);
-        } else {
-            return new Post(0, "Сообщения с таким ID не существует");
-        }
+        //В условии задачи не сказано, что обязателен Exception. Временно заменен на более читаемое.
+        return repository.getById(id).orElseGet(() -> new Post(0, "Пост не найден"));
     }
 
     public Post save(Post post) {
