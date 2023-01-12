@@ -16,7 +16,9 @@ public class PostService {
     }
 
     public List<Post> all() {
-        return repository.all();
+        List<Post> postsFromRepo = repository.all();
+        postsFromRepo.removeIf(Post::getRemoved);
+        return postsFromRepo;
     }
 
     public Post getById(long id) {
