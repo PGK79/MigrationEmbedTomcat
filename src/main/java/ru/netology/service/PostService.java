@@ -4,7 +4,7 @@ import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 import ru.netology.repository.PostRepository;
 
-import java.util.Map;
+import java.util.List;
 
 public class PostService {
     private final PostRepository repository;
@@ -13,12 +13,12 @@ public class PostService {
         this.repository = repository;
     }
 
-    public Map<Long, Post> all() {
+    public List<Post> all() {
         return repository.all();
     }
 
     public Post getById(long id) {
-        if (id <= all().size() && all().containsKey(id)) {
+        if (id <= all().size()) {
             return repository.getById(id).orElseThrow(NotFoundException::new);
         } else {
             return new Post(0, "Сообщения с таким ID не существует");
@@ -33,12 +33,7 @@ public class PostService {
         }
     }
 
-    public String removeById(long id) {
-        if (all().containsKey(id)) {
-            repository.removeById(id);
-            return "Пост удален";
-        } else {
-            return "Пост не найден";
-        }
+    public void removeById(long id) {
+        repository.removeById(id);
     }
 }
