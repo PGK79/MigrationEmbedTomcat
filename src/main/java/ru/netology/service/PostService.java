@@ -23,18 +23,17 @@ public class PostService {
 
     public Post getById(long id) {
         Post post = repository.getById(id).orElseThrow(NotFoundException::new);
-        if(post.getRemoved()){
+        if(post.getRemoved()) {
             throw new NotFoundException();
         }
         return post;
     }
 
     public Post save(Post post) {
-        if (post.getId() <= all().size()) {
-            return repository.save(post);
-        } else {
-            return new Post(0, "Введено не корректное ID. Измените ID");
+        if (repository.all().size() != 0 && post.getId() != 0) {
+            getById(post.getId()); // здесь же и NotFoundException если удален или не существует id
         }
+        return repository.save(post);
     }
 
     public void removeById(long id) {
