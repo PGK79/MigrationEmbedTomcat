@@ -1,6 +1,7 @@
 package ru.netology.service;
 
 import org.springframework.stereotype.Service;
+import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 import ru.netology.repository.PostRepository;
 
@@ -32,6 +33,6 @@ public class PostService {
     }
 
     public void removeById(long id) {
-        repository.removeById(id);
+        repository.getById(id).orElseThrow(NotFoundException::new).setRemoved(true);
     }
 }
