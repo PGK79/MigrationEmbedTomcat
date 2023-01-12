@@ -3,7 +3,7 @@ package ru.netology.model;
 public class Post {
     private long id;
     private String content;
-    private boolean removed;
+    transient private boolean removed;
 
     public Post() {
     }
@@ -29,8 +29,11 @@ public class Post {
         this.content = content;
     }
 
-    public boolean getRemoved(){return removed;}
-    public void setRemoved(long id) {
+    public boolean getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(boolean removed) {
         this.removed = removed;
     }
 
