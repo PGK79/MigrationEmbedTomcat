@@ -20,8 +20,7 @@ public class PostService {
     }
 
     public Post getById(long id) {
-        //В условии задачи не сказано, что обязателен Exception. Временно заменен на более читаемое.
-        return repository.getById(id).orElseGet(() -> new Post(0, "Пост не найден"));
+        return repository.getById(id).orElseThrow(NotFoundException::new);
     }
 
     public Post save(Post post) {
