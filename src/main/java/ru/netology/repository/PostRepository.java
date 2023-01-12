@@ -2,6 +2,8 @@ package ru.netology.repository;
 
 import ru.netology.model.Post;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,8 +13,8 @@ public class PostRepository {
     private final Map<Long, Post> allPosts = new ConcurrentHashMap<>();
     private final AtomicLong counter = new AtomicLong(0);
 
-    public Map<Long, Post> all() { //мапа показалась удобней, быстрее и безопасней списка
-        return allPosts;
+    public List<Post> all() {
+        return new ArrayList<>(allPosts.values());
     }
 
     public Optional<Post> getById(long id) {
